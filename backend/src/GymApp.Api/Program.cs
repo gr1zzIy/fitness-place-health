@@ -1,17 +1,14 @@
+using GymApp.Infrastructure;
 using GymApp.Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var configuration = builder.Configuration;
-
 builder.Services.AddOpenApi();
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options
-        .UseNpgsql(configuration.GetConnectionString("Database"))
-        .UseSnakeCaseNamingConvention()
-    );
+builder.Services.AddDatabaseInfrastructure(
+    builder.Configuration);
+
+builder.Services.AddIdentityInfrastructure();
 
 var app = builder.Build();
 
@@ -19,6 +16,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    await app.SeedIdentityDataAsync();
 }
 
 app.UseHttpsRedirection();

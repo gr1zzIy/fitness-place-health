@@ -1,3 +1,4 @@
+using GymApp.Application.Common.Interfaces;
 using GymApp.Domain.Attendances;
 using GymApp.Domain.Bookings;
 using GymApp.Domain.Gyms;
@@ -11,7 +12,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GymApp.Infrastructure.Persistence;
 
-public class AppDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
+public class AppDbContext : 
+    IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>, 
+    IAppDbContext
 {
     // Gyms
     public DbSet<Gym> Gyms => Set<Gym>();
