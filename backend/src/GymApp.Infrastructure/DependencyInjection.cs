@@ -54,6 +54,9 @@ public static class DependencyInjection
             .AddEntityFrameworkStores<AppDbContext>()
             .AddDefaultTokenProviders();
         
+        // Для проброса так як не можна юзати UserManager<ApplicationUser> напряму в Application Layer
+        services.AddScoped<IIdentityService, IdentityService>();
+        
         return services;
     }
 }

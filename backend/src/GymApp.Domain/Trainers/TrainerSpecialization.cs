@@ -2,6 +2,14 @@ namespace GymApp.Domain.Trainers;
 
 public sealed class TrainerSpecialization
 {
+    private TrainerSpecialization() { }
+
+    public TrainerSpecialization(Guid trainerProfileId, Guid specializationId)
+    {
+        TrainerProfileId = trainerProfileId;
+        SpecializationId = specializationId;
+    }
+    
     public Guid TrainerProfileId { get; private set; }
     public Guid SpecializationId { get; private set; }
     

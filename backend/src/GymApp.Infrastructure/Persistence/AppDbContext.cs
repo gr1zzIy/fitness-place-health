@@ -9,6 +9,7 @@ using GymApp.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace GymApp.Infrastructure.Persistence;
 
@@ -32,7 +33,7 @@ public class AppDbContext :
     // Memberships & Finance
     public DbSet<MembershipPlan> MembershipPlans => Set<MembershipPlan>();
     public DbSet<ClientMembership> ClientMemberships => Set<ClientMembership>();
-    
+
     // Trainers
     public DbSet<TrainerProfile> TrainerProfiles => Set<TrainerProfile>();
     public DbSet<Specialization> Specializations => Set<Specialization>();
@@ -42,6 +43,11 @@ public class AppDbContext :
     {
     }
 
+    public Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
+    {
+        return Database.BeginTransactionAsync(cancellationToken);
+    }    
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

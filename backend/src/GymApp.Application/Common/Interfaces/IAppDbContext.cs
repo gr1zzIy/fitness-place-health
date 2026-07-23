@@ -5,6 +5,7 @@ using GymApp.Domain.Memberships;
 using GymApp.Domain.Schedule;
 using GymApp.Domain.Trainers;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace GymApp.Application.Common.Interfaces;
 
@@ -28,4 +29,6 @@ public interface IAppDbContext
     DbSet<ClientMembership> ClientMemberships { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+    
+    Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default);
 }

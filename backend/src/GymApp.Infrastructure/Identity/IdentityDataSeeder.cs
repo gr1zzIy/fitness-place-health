@@ -1,3 +1,4 @@
+using GymApp.Domain.Constants;
 using Microsoft.AspNetCore.Identity;
 
 namespace GymApp.Infrastructure.Identity;

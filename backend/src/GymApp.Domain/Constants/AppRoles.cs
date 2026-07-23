@@ -1,4 +1,4 @@
-namespace GymApp.Infrastructure.Identity;
+namespace GymApp.Domain.Constants;
 
 public static class AppRoles
 {
