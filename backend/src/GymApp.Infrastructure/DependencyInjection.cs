@@ -10,10 +10,14 @@ namespace GymApp.Infrastructure;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddDatabaseInfrastructure(
+    public static IServiceCollection AddInfrastructureServices(
         this IServiceCollection services,
         IConfiguration configuration)
     {
+        // для токенів Identity
+        services.AddDataProtection();
+        
+        // БД підключення
         var connectionString = configuration.GetConnectionString(
             "Database");
 
@@ -33,12 +37,8 @@ public static class DependencyInjection
         services.AddScoped<IAppDbContext>(
             provider => provider.GetRequiredService<AppDbContext>());
 
-        return services;
-    }
-
-    public static IServiceCollection AddIdentityInfrastructure(
-        this IServiceCollection services)
-    {
+        // Ролі
+        
         services
             .AddIdentityCore<ApplicationUser>(options =>
             {
